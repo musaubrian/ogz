@@ -1,0 +1,12 @@
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/SDL3_image-static.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/uninstall.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/showanim.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/showimage.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/package.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/package_source.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/edit_cache.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/rebuild_cache.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/list_install_components.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/install.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/install/local.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_image/src/CMakeFiles/install/strip.dir

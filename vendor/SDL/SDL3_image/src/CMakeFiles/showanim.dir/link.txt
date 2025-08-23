@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/showanim.dir/link.d CMakeFiles/showanim.dir/examples/showanim.c.o -o showanim  libSDL3_image.a /usr/lib/libSDL3.so.0.2.20

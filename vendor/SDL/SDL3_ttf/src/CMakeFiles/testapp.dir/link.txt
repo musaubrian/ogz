@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/testapp.dir/link.d CMakeFiles/testapp.dir/examples/testapp.c.o -o testapp  libSDL3_ttf.a /usr/lib/libSDL3.so.0.2.20 /usr/lib/libharfbuzz.so /usr/lib/libfreetype.so

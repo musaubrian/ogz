@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/showimage.dir/link.d CMakeFiles/showimage.dir/examples/showimage.c.o -o showimage  libSDL3_image.a /usr/lib/libSDL3.so.0.2.20

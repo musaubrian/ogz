@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/showfont.dir/link.d CMakeFiles/showfont.dir/examples/showfont.c.o CMakeFiles/showfont.dir/examples/editbox.c.o -o showfont  libSDL3_ttf.a /usr/lib/libSDL3.so.0.2.20 /usr/lib/libharfbuzz.so /usr/lib/libfreetype.so

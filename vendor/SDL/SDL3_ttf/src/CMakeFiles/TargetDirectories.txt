@@ -1,0 +1,13 @@
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/SDL3_ttf-static.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/glfont.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/showfont.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/testapp.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/testgputext.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/package.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/package_source.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/edit_cache.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/rebuild_cache.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/list_install_components.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/install.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/install/local.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3_ttf/src/CMakeFiles/install/strip.dir

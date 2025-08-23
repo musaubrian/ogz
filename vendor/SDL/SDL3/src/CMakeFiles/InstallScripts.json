@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

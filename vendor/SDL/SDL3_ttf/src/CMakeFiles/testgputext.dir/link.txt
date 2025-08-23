@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/testgputext.dir/link.d CMakeFiles/testgputext.dir/examples/testgputext.c.o -o testgputext  libSDL3_ttf.a /usr/lib/libSDL3.so.0.2.20 /usr/lib/libharfbuzz.so /usr/lib/libfreetype.so

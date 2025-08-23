@@ -1,0 +1,12 @@
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/SDL3-static.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/SDL3_test.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/SDL_uclibc.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/uninstall.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/package.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/package_source.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/edit_cache.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/rebuild_cache.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/list_install_components.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/install.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/install/local.dir
+/home/sminwn/personal/ogz/vendor/SDL/SDL3/src/CMakeFiles/install/strip.dir
