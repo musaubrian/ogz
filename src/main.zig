@@ -7,8 +7,9 @@ const Color = Dgz.Color;
 const Ui = Dgz.Ui;
 const Texture = Dgz.Texture;
 
-const width = 1080;
-const height = 720;
+const Width = 1080;
+const Height = 720;
+const FontSize = 18;
 
 pub fn main() !void {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
@@ -18,7 +19,7 @@ pub fn main() !void {
     try Dgz.init(Dgz.Subsystem.VIDEO);
     defer Dgz.deinit();
 
-    var window = try Window.create("OGZ", width, height, WindowFlags.RESIZABLE);
+    var window = try Window.create("OGZ", Width, Height, WindowFlags.RESIZABLE);
     defer window.destroy();
 
     var renderer = try Renderer.create(&window);
@@ -27,10 +28,20 @@ pub fn main() !void {
     var rect: Dgz.Rect = .{ .x = 40, .y = 400, .h = 100, .w = 100 };
     var circle: Dgz.Circle = .{ .x = 500, .y = 200, .radius = 50 };
 
-    var dunno_texture = try Texture.create(&renderer, "/home/sminwn/Pictures/memes/dunno.png");
-    defer dunno_texture.destroy();
+    var magazine_texture = try Texture.create(
+        &renderer,
+        try Dgz.expandRelativePath(allocator, "./assets/textures/magazine.jpg"),
+    );
+    defer magazine_texture.destroy();
 
-    var font = try Texture.Font.init(&renderer, try Dgz.expandRelativePath(allocator, "./assets/fonts/RobotoCondensed-Medium.ttf"), 24);
+    var font = try Texture.Font.init(
+        &renderer,
+        try Dgz.expandRelativePath(
+            allocator,
+            "./assets/fonts/RobotoCondensed-Medium.ttf",
+        ),
+        FontSize,
+    );
     defer font.deinit();
 
     var progress_value: i32 = 0;
@@ -51,8 +62,13 @@ pub fn main() !void {
         try renderer.setBgColor(Color.BLACK);
         try renderer.clear();
 
-        try dunno_texture.render(100, 300);
         const window_dimensions = try window.getSize();
+        try magazine_texture.render(
+            @divTrunc(window_dimensions.w, 2),
+            30,
+            @divTrunc(window_dimensions.w, 3),
+            (window_dimensions.h - 100),
+        );
 
         try ui.drawFilledRect(rect, Color.BLUE);
         try ui.drawFilledCircle(circle, null);
@@ -62,15 +78,17 @@ pub fn main() !void {
 
         try ui.slider("slider1", 10, 40, 300, &slider_value);
         try ui.slider("slider3", 10, 60, 200, &slider_value1);
-        try ui.label("DEBUG TEST", 10, 90, null);
+
+        try ui.label("CTRL+Q to exit", 10, 90, Color.RED);
 
         if (try ui.button(
-            "Yay",
+            "Increment ++",
             .{ .x = 200, .y = 200, .h = 40, .w = 200 },
             .{
                 .active = Color.RED,
                 .hover = Color.BLUE,
                 .inactive = Color.LIGHT_GRAY,
+                .label = Color.BLACK,
             },
         )) {
             rect.w += 20;
@@ -79,12 +97,13 @@ pub fn main() !void {
         }
 
         if (try ui.button(
-            "No yay",
+            "Decrement --",
             .{ .x = 200, .y = 300, .h = 40, .w = 200 },
             .{
                 .active = Color.DARK_GRAY,
-                .hover = Color.WHITE,
+                .hover = Color.DARK_RED,
                 .inactive = Color.GREEN,
+                .label = Color.BLACK,
             },
         )) {
             rect.w -= 20;

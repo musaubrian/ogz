@@ -217,11 +217,13 @@ pub const Texture = struct {
         self.handle = null;
     }
 
-    pub fn render(self: *Texture, x: i32, y: i32) !void {
+    pub fn render(self: *Texture, x: i32, y: i32, w: i32, h: i32) !void {
         if (self.handle == null) return error.RenderTextureFailed;
+
+        // TODO:: (8b5e6d191cc0) find a way to scale up/down
         const container: Rect = .{
-            .h = @intCast(self.handle.*.h),
-            .w = @intCast(self.handle.*.w),
+            .h = h,
+            .w = w,
             .x = x,
             .y = y,
         };
@@ -375,6 +377,7 @@ pub const Ui = struct {
         inactive: Color,
         hover: Color,
         active: Color,
+        label: Color,
     };
 
     const ButtonState = enum { inactive, hovered, clicked };
@@ -547,7 +550,7 @@ pub const Ui = struct {
 
         const text_x = dimensions.x + @divTrunc(actual_w - text_size.w, 2);
         const text_y = dimensions.y + @divTrunc(dimensions.h - text_size.h, 2);
-        _ = try self.font.renderText(labelText, text_x, text_y, Color.WHITE);
+        _ = try self.font.renderText(labelText, text_x, text_y, btn_colors.label);
 
         return clicked;
     }
