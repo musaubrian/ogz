@@ -357,8 +357,8 @@ pub const Ui = struct {
     theme: Theme,
     allocator: std.mem.Allocator,
 
-    circle_points_buffer: std.ArrayList(Point),
-    filled_circle_rect_buffer: std.ArrayList(c.SDL_FRect),
+    circle_points_buffer: std.ArrayList(Point) = .empty,
+    filled_circle_rect_buffer: std.ArrayList(c.SDL_FRect) = .empty,
 
     const Theme = struct {
         progress_colors: ProgressColors,
@@ -405,14 +405,12 @@ pub const Ui = struct {
             .renderer = renderer,
             .font = font,
             .theme = theme orelse defaultTheme(),
-            .circle_points_buffer = std.ArrayList(Point).init(alloc),
-            .filled_circle_rect_buffer = std.ArrayList(c.SDL_FRect).init(alloc),
         };
     }
 
     pub fn deinit(self: *Ui) void {
-        self.circle_points_buffer.deinit();
-        self.filled_circle_rect_buffer.deinit();
+        self.circle_points_buffer.deinit(self.allocator);
+        self.filled_circle_rect_buffer.deinit(self.allocator);
     }
 
     pub fn drawFilledRect(self: *Ui, r: Rect, color: Color) !void {
@@ -440,14 +438,14 @@ pub const Ui = struct {
         self.circle_points_buffer.clearRetainingCapacity();
 
         while (offset_y >= offset_x) {
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x + offset_x), .y = @floatFromInt(circle.y + offset_y) });
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x - offset_x), .y = @floatFromInt(circle.y + offset_y) });
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x + offset_x), .y = @floatFromInt(circle.y - offset_y) });
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x - offset_x), .y = @floatFromInt(circle.y - offset_y) });
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x + offset_y), .y = @floatFromInt(circle.y + offset_x) });
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x - offset_y), .y = @floatFromInt(circle.y + offset_x) });
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x + offset_y), .y = @floatFromInt(circle.y - offset_x) });
-            try self.circle_points_buffer.append(.{ .x = @floatFromInt(circle.x - offset_y), .y = @floatFromInt(circle.y - offset_x) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x + offset_x), .y = @floatFromInt(circle.y + offset_y) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x - offset_x), .y = @floatFromInt(circle.y + offset_y) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x + offset_x), .y = @floatFromInt(circle.y - offset_y) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x - offset_x), .y = @floatFromInt(circle.y - offset_y) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x + offset_y), .y = @floatFromInt(circle.y + offset_x) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x - offset_y), .y = @floatFromInt(circle.y + offset_x) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x + offset_y), .y = @floatFromInt(circle.y - offset_x) });
+            try self.circle_points_buffer.append(self.allocator, .{ .x = @floatFromInt(circle.x - offset_y), .y = @floatFromInt(circle.y - offset_x) });
 
             offset_x += 1;
 
@@ -470,19 +468,10 @@ pub const Ui = struct {
         var d = 1 - circle.radius;
 
         while (offset_y >= offset_x) {
-            // try points.append(.{ .x = @floatFromInt(circle.x + offset_x), .y = @floatFromInt(circle.y + offset_y) });
-            // try points.append(.{ .x = @floatFromInt(circle.x - offset_x), .y = @floatFromInt(circle.y + offset_y) });
-            try self.filled_circle_rect_buffer.append(toSDLRect(.{ .x = circle.x - offset_x, .y = circle.y + offset_y, .w = 2 * offset_x + 1, .h = 1 }));
-
-            // try points.append(.{ .x = @floatFromInt(circle.x + offset_x), .y = @floatFromInt(circle.y - offset_y) });
-            // try points.append(.{ .x = @floatFromInt(circle.x - offset_x), .y = @floatFromInt(circle.y - offset_y) });
-            try self.filled_circle_rect_buffer.append(toSDLRect(.{ .x = circle.x - offset_x, .y = circle.y - offset_y, .w = 2 * offset_x + 1, .h = 1 }));
-            // try points.append(.{ .x = @floatFromInt(circle.x + offset_y), .y = @floatFromInt(circle.y + offset_x) });
-            // try points.append(.{ .x = @floatFromInt(circle.x - offset_y), .y = @floatFromInt(circle.y + offset_x) });
-            try self.filled_circle_rect_buffer.append(toSDLRect(.{ .x = circle.x - offset_y, .y = circle.y + offset_x, .w = 2 * offset_y + 1, .h = 1 }));
-            // try points.append(.{ .x = @floatFromInt(circle.x + offset_y), .y = @floatFromInt(circle.y - offset_x) });
-            // try points.append(.{ .x = @floatFromInt(circle.x - offset_y), .y = @floatFromInt(circle.y - offset_x) });
-            try self.filled_circle_rect_buffer.append(toSDLRect(.{ .x = circle.x - offset_y, .y = circle.y - offset_x, .w = 2 * offset_y + 1, .h = 1 }));
+            try self.filled_circle_rect_buffer.append(self.allocator, toSDLRect(.{ .x = circle.x - offset_x, .y = circle.y + offset_y, .w = 2 * offset_x + 1, .h = 1 }));
+            try self.filled_circle_rect_buffer.append(self.allocator, toSDLRect(.{ .x = circle.x - offset_x, .y = circle.y - offset_y, .w = 2 * offset_x + 1, .h = 1 }));
+            try self.filled_circle_rect_buffer.append(self.allocator, toSDLRect(.{ .x = circle.x - offset_y, .y = circle.y + offset_x, .w = 2 * offset_y + 1, .h = 1 }));
+            try self.filled_circle_rect_buffer.append(self.allocator, toSDLRect(.{ .x = circle.x - offset_y, .y = circle.y - offset_x, .w = 2 * offset_y + 1, .h = 1 }));
 
             offset_x += 1;
 
@@ -503,7 +492,7 @@ pub const Ui = struct {
     }
 
     pub fn button(self: *Ui, labelText: []const u8, dimensions: Rect, btn_colors: BtnColors) !bool {
-        if (labelText.len == 0) return error.InvalidLabel;
+        if (labelText.len == 0) return error.EmptyLabel;
 
         if (ui_state.active_id == null) ui_state.hot_id = null;
         const text_size = try self.font.renderText(labelText, 0, -1000, null); // Measure offscreen first
@@ -564,7 +553,7 @@ pub const Ui = struct {
     }
 
     pub fn slider(self: *Ui, labelText: []const u8, x: i32, y: i32, w: i32, value: *i32) !void {
-        if (labelText.len == 0) return error.InvalidLabel;
+        if (labelText.len == 0) return error.EmptyLabel;
 
         if (ui_state.active_id == null) ui_state.hot_id = null;
 

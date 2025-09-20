@@ -7,10 +7,10 @@ pub fn buildSDLLib(b: *std.Build, comptime name: []const u8, comptime src_dir: [
         std.fs.cwd().makeDir(src_dir ++ "/build") catch {};
 
         // Configure with library-specific flags
-        var cmake_args = std.ArrayList([]const u8).init(allocator);
-        defer cmake_args.deinit();
+        var cmake_args: std.ArrayList([]const u8) = .empty;
+        defer cmake_args.deinit(allocator);
 
-        try cmake_args.appendSlice(&.{
+        try cmake_args.appendSlice(allocator, &.{
             "cmake",
             "..",
             "-DCMAKE_BUILD_TYPE=Release",
